@@ -9,6 +9,11 @@ import Register from '../Pages/Login/Register.js';
 import LessonDetails from '../Pages/Lesson/LessonDetails.js';
 import BlogDetails from '../Pages/Home/BlogDetails.js';
 import Overview from '../Pages/Dashboard/Overview.js';
+import ManageLessons from '../Pages/Dashboard/ManageLessons.js';
+import AddLesson from '../Pages/Dashboard/AddLesson.js';
+import AddVocabulary from '../Pages/Dashboard/AddVocabulary.js';
+import ManageUsers from '../Pages/Dashboard/ManageUsers.js';
+import ManageVocabularies from '../Pages/Dashboard/ManageVocabularies.js';
 
 const AppRoutes = () => {
     return (
@@ -22,11 +27,17 @@ const AppRoutes = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
 
+
+
+
             {/* Dashboard Routes */}
             <Route path="/dashboard" element={<Dashboard />}>
                 <Route index element={<Overview />} /> {/* Default dashboard child */}
-                {/* Add more child routes as needed */}
-                {/* Example: <Route path="updateProject" element={<UpdateProject />} /> */}
+                <Route path="lessons" element={<ManageLessons />} />
+                <Route path="add-lesson" element={<AddLesson />} />
+                <Route path="add-vocabulary" element={<AddVocabulary />} />
+                <Route path="manage-users" element={<ManageUsers />} />
+                <Route path="manage-vocabularies" element={<ManageVocabularies />} />
             </Route>
         </Routes>
     );
