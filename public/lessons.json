@@ -1,0 +1,63 @@
+[
+  {
+    "id": 1,
+    "title": "Lesson 1: Introduction to English",
+    "description": "Learn the basics of the English language.",
+    "content": "This lesson introduces the foundational concepts of English.",
+    "image": "https://d3f1iyfxxz8i1e.cloudfront.net/courses/course_image/1a9cb9b31643.jpg",
+    "steps": [
+      {
+        "title": "Step 1: Alphabets",
+        "content": "Learn the English alphabets."
+      },
+      {
+        "title": "Step 2: Pronunciation",
+        "content": "Practice pronunciation basics."
+      },
+      {
+        "title": "Step 3: Common Words",
+        "content": "Learn common words for daily use."
+      },
+      {
+        "title": "Step 4: Quiz",
+        "content": "Test your knowledge with a quiz.",
+        "quiz": {
+          "questions": [
+            {
+              "question": "What is the first letter of the English alphabet?",
+              "options": ["A", "B", "C", "D"],
+              "answer": "A"
+            },
+            {
+              "question": "Which word means 'greeting'?",
+              "options": ["Hello", "Bye", "Yes", "No"],
+              "answer": "Hello"
+            }
+          ]
+        }
+      }
+    ]
+  },  
+  {
+    "id": 2,
+    "title": "Lesson 2: Grammar Fundamentals",
+    "description": "Understand the core concepts of English grammar.",
+    "content": "This lesson covers essential grammar rules and usage.",
+    "image": "/images/lesson2.jpg",
+    "resources": [
+      "https://example.com/resource3",
+      "https://example.com/resource4"
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Lesson 3: Vocabulary Building",
+    "description": "Expand your vocabulary with common words.",
+    "content": "This lesson focuses on essential words and phrases for daily use.",
+    "image": "/images/lesson3.jpg",
+    "resources": [
+      "https://example.com/resource5",
+      "https://example.com/resource6"
+    ]
+  }
+]

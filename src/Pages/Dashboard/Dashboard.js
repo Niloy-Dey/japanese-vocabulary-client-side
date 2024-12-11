@@ -1,9 +1,24 @@
 import React from 'react';
+import { Outlet } from 'react-router-dom';
+import SideBar from './SideBar';
+import Navbar from '../../Component/Shared/Navbar';
 
 const Dashboard = () => {
     return (
-        <div>
-            hi dashboard
+        <div className="pt-4">
+            {/* Navbar */}
+            <Navbar />
+            {/* Main Layout */}
+            <div className="flex">
+                {/* Sidebar */}
+                <div className="w-64 bg-gray-800 text-white h-screen">
+                    <SideBar />
+                </div>
+                {/* Main Content */}
+                <div className="flex-1 p-4">
+                    <Outlet /> {/* Render child routes */}
+                </div>
+            </div>
         </div>
     );
 };
