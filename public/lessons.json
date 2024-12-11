@@ -1,58 +1,60 @@
 [
-  {
-    "id": 1,
-    "title": "Lesson 1: Foundations of Japanese Vocabulary",
-    "description": "Build a strong base in essential vocabulary for everyday life.",
-    "content": "This lesson covers greetings, numbers, and basic particles to form a foundation for learning Japanese.",
-    "image": "https://www3.nhk.or.jp/nhkworld/en/learnjapanese/assets/images/programs/conversation.jpg",
-    "steps": [
-      {
-        "title": "Step 1: Greetings and Basic Expressions",
-        "content": "Learn common greetings like こんにちは (Konnichiwa - Hello) and ありがとう (Arigatou - Thank you), as well as polite responses such as はい (Hai - Yes) and いいえ (Iie - No).",
-        "quiz": {
-          "questions": [
-            {
-              "question": "What is the Japanese word for 'Hello'?",
-              "options": ["こんにちは", "ありがとう", "おはよう"],
-              "answer": "こんにちは"
-            },
-            {
-              "question": "What does 'いいえ' mean in English?",
-              "options": ["Yes", "No", "Thank you"],
-              "answer": "No"
-            }
-          ]
+  
+    {
+      "id": 1,
+      "title": "Lesson 1: Foundations of Japanese Vocabulary",
+      "description": "Build a strong base in essential vocabulary for everyday life.",
+      "content": "This lesson covers greetings, numbers, and basic particles to form a foundation for learning Japanese.",
+      "image": "https://www3.nhk.or.jp/nhkworld/en/learnjapanese/assets/images/programs/conversation.jpg",
+      "steps": [
+        {
+          "title": "Step 1: Greetings and Basic Expressions",
+          "content": "Learn common greetings like こんにちは (Konnichiwa - Hello) and ありがとう (Arigatou - Thank you), as well as polite responses such as はい (Hai - Yes) and いいえ (Iie - No).",
+          "quiz": {
+            "questions": [
+              {
+                "question": "What is the Japanese word for 'Hello'?",
+                "options": ["こんにちは", "ありがとう", "おはよう"],
+                "answer": "こんにちは"
+              },
+              {
+                "question": "What does 'いいえ' mean in English?",
+                "options": ["Yes", "No", "Thank you"],
+                "answer": "No"
+              }
+            ]
+          }
+        },
+        {
+          "title": "Step 2: Numbers and Counting",
+          "content": "Learn numbers from 1 to 10, tens, and hundreds, as well as terms for age like 一歳 (issai - 1 year old).",
+          "quiz": {
+            "questions": [
+              {
+                "question": "What is the Japanese word for the number 1?",
+                "options": ["いち (ichi)", "に (ni)", "さん (san)"],
+                "answer": "いち (ichi)"
+              },
+              {
+                "question": "How do you say '10' in Japanese?",
+                "options": ["じゅう (juu)", "きゅう (kyuu)", "ご (go)"],
+                "answer": "じゅう (juu)"
+              }
+            ]
+          }
+        },
+        {
+          "title": "Step 3: Introduction to Particles",
+          "content": "Understand the usage of は (wa), を (wo), and で (de) through examples and practice."
+        },
+        {
+          "title": "Step 4: Practice Tasks",
+          "content": "Create simple self-introductions and role-play greetings in Japanese."
         }
-      },
-      {
-        "title": "Step 2: Numbers and Counting",
-        "content": "Learn numbers from 1 to 10, tens, and hundreds, as well as terms for age like 一歳 (issai - 1 year old).",
-        "quiz": {
-          "questions": [
-            {
-              "question": "What is the Japanese word for the number 1?",
-              "options": ["いち (ichi)", "に (ni)", "さん (san)"],
-              "answer": "いち (ichi)"
-            },
-            {
-              "question": "How do you say '10' in Japanese?",
-              "options": ["じゅう (juu)", "きゅう (kyuu)", "ご (go)"],
-              "answer": "じゅう (juu)"
-            }
-          ]
-        }
-      },
-      {
-        "title": "Step 3: Introduction to Particles",
-        "content": "Understand the usage of は (wa), を (wo), and で (de) through examples and practice."
-      },
-      {
-        "title": "Step 4: Practice Tasks",
-        "content": "Create simple self-introductions and role-play greetings in Japanese."
-      }
-    ]
-  },
-
+      ]
+    },
+  
+  
 
 
 
