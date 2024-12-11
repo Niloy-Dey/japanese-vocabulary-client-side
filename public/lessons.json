@@ -1,63 +1,402 @@
 [
   {
     "id": 1,
-    "title": "Lesson 1: Introduction to English",
-    "description": "Learn the basics of the English language.",
-    "content": "This lesson introduces the foundational concepts of English.",
-    "image": "https://d3f1iyfxxz8i1e.cloudfront.net/courses/course_image/1a9cb9b31643.jpg",
+    "title": "Lesson 1: Foundations of Japanese Vocabulary",
+    "description": "Build a strong base in essential vocabulary for everyday life.",
+    "content": "This lesson covers greetings, numbers, and basic particles to form a foundation for learning Japanese.",
+    "image": "https://www3.nhk.or.jp/nhkworld/en/learnjapanese/assets/images/programs/conversation.jpg",
     "steps": [
       {
-        "title": "Step 1: Alphabets",
-        "content": "Learn the English alphabets."
-      },
-      {
-        "title": "Step 2: Pronunciation",
-        "content": "Practice pronunciation basics."
-      },
-      {
-        "title": "Step 3: Common Words",
-        "content": "Learn common words for daily use."
-      },
-      {
-        "title": "Step 4: Quiz",
-        "content": "Test your knowledge with a quiz.",
+        "title": "Step 1: Greetings and Basic Expressions",
+        "content": "Learn common greetings like こんにちは (Konnichiwa - Hello) and ありがとう (Arigatou - Thank you), as well as polite responses such as はい (Hai - Yes) and いいえ (Iie - No).",
         "quiz": {
           "questions": [
             {
-              "question": "What is the first letter of the English alphabet?",
-              "options": ["A", "B", "C", "D"],
-              "answer": "A"
+              "question": "What is the Japanese word for 'Hello'?",
+              "options": ["こんにちは", "ありがとう", "おはよう"],
+              "answer": "こんにちは"
             },
             {
-              "question": "Which word means 'greeting'?",
-              "options": ["Hello", "Bye", "Yes", "No"],
-              "answer": "Hello"
+              "question": "What does 'いいえ' mean in English?",
+              "options": ["Yes", "No", "Thank you"],
+              "answer": "No"
             }
           ]
         }
+      },
+      {
+        "title": "Step 2: Numbers and Counting",
+        "content": "Learn numbers from 1 to 10, tens, and hundreds, as well as terms for age like 一歳 (issai - 1 year old).",
+        "quiz": {
+          "questions": [
+            {
+              "question": "What is the Japanese word for the number 1?",
+              "options": ["いち (ichi)", "に (ni)", "さん (san)"],
+              "answer": "いち (ichi)"
+            },
+            {
+              "question": "How do you say '10' in Japanese?",
+              "options": ["じゅう (juu)", "きゅう (kyuu)", "ご (go)"],
+              "answer": "じゅう (juu)"
+            }
+          ]
+        }
+      },
+      {
+        "title": "Step 3: Introduction to Particles",
+        "content": "Understand the usage of は (wa), を (wo), and で (de) through examples and practice."
+      },
+      {
+        "title": "Step 4: Practice Tasks",
+        "content": "Create simple self-introductions and role-play greetings in Japanese."
       }
     ]
-  },  
+  },
+
+
+
+
   {
     "id": 2,
-    "title": "Lesson 2: Grammar Fundamentals",
-    "description": "Understand the core concepts of English grammar.",
-    "content": "This lesson covers essential grammar rules and usage.",
-    "image": "/images/lesson2.jpg",
-    "resources": [
-      "https://example.com/resource3",
-      "https://example.com/resource4"
+    "title": "Lesson 2: Everyday Life Vocabulary",
+    "description": "Learn essential words for navigating daily activities.",
+    "content": "This lesson covers daily routines, family terms, and places around town.",
+    "image": "/images/japanese_everyday.jpg",
+    "steps": [
+      {
+        "title": "Step 1: Daily Routines and Activities",
+        "content": "Learn vocabulary for daily activities like 食べる (taberu - to eat), 飲む (nomu - to drink), and 行く (iku - to go), as well as time-related expressions such as 今 (ima - now) and 今日 (kyou - today).",
+        "quiz": {
+          "questions": [
+            {
+              "question": "What is the Japanese word for 'to eat'?",
+              "options": ["飲む (nomu)", "食べる (taberu)", "行く (iku)"],
+              "answer": "食べる (taberu)"
+            },
+            {
+              "question": "How do you say 'now' in Japanese?",
+              "options": ["今日 (kyou)", "今 (ima)", "昨日 (kinou)"],
+              "answer": "今 (ima)"
+            }
+          ]
+        }
+      },
+      {
+        "title": "Step 2: Family and Relationships",
+        "content": "Learn family terms like 母 (haha - mother) and 父 (chichi - father), along with honorific forms like お母さん (okaasan - mother, formal).",
+        "quiz": {
+          "questions": [
+            {
+              "question": "What is the honorific term for 'mother'?",
+              "options": ["母 (haha)", "お母さん (okaasan)", "父 (chichi)"],
+              "answer": "お母さん (okaasan)"
+            },
+            {
+              "question": "What does '父 (chichi)' mean?",
+              "options": ["Father", "Mother", "Sibling"],
+              "answer": "Father"
+            }
+          ]
+        }
+      },
+      {
+        "title": "Step 3: Places Around Town",
+        "content": "Expand vocabulary with words like 駅 (eki - station) and 学校 (gakkou - school), and practice directional phrases like 右 (migi - right) and 左 (hidari - left).",
+        "quiz": {
+          "questions": [
+            {
+              "question": "What is the Japanese word for 'station'?",
+              "options": ["学校 (gakkou)", "駅 (eki)", "左 (hidari)"],
+              "answer": "駅 (eki)"
+            },
+            {
+              "question": "How do you say 'right' in Japanese?",
+              "options": ["左 (hidari)", "右 (migi)", "上 (ue)"],
+              "answer": "右 (migi)"
+            }
+          ]
+        }
+      },
+      {
+        "title": "Step 4: Practice Tasks",
+        "content": "Write a short paragraph describing your daily routine and practice asking for directions."
+      }
     ]
   },
+
+
+
+
+
+
   {
     "id": 3,
-    "title": "Lesson 3: Vocabulary Building",
-    "description": "Expand your vocabulary with common words.",
-    "content": "This lesson focuses on essential words and phrases for daily use.",
-    "image": "/images/lesson3.jpg",
-    "resources": [
-      "https://example.com/resource5",
-      "https://example.com/resource6"
+    "title": "Lesson 3: Food and Shopping Vocabulary",
+    "description": "Understand words and phrases for food, dining, and shopping.",
+    "content": "This lesson focuses on food-related vocabulary and phrases for shopping and payments.",
+    "image": "/images/japanese_food_shopping.jpg",
+    "steps": [
+      {
+        "title": "Step 1: Food Vocabulary",
+        "content": "Learn common food items like ご飯 (gohan - rice), 肉 (niku - meat), and 野菜 (yasai - vegetables), and phrases like 美味しい (oishii - delicious).",
+        "quiz": {
+          "questions": [
+            {
+              "question": "What is the Japanese word for 'rice'?",
+              "options": ["ご飯 (gohan)", "肉 (niku)", "野菜 (yasai)"],
+              "answer": "ご飯 (gohan)"
+            },
+            {
+              "question": "How do you say 'delicious' in Japanese?",
+              "options": ["美味しい (oishii)", "辛い (karai)", "甘い (amai)"],
+              "answer": "美味しい (oishii)"
+            }
+          ]
+        }
+      },
+      {
+        "title": "Step 2: Shopping Terms",
+        "content": "Understand terms like 値段 (nedan - price) and 買う (kau - to buy), and phrases like いくらですか？ (Ikura desu ka? - How much is it?).",
+        "quiz": {
+          "questions": [
+            {
+              "question": "What does '値段 (nedan)' mean?",
+              "options": ["Price", "Buy", "Shop"],
+              "answer": "Price"
+            },
+            {
+              "question": "What is the meaning of 'いくらですか？ (Ikura desu ka?)'?",
+              "options": ["Where is it?", "How much is it?", "What is it?"],
+              "answer": "How much is it?"
+            }
+          ]
+        }
+      },
+      {
+        "title": "Step 3: Currency and Payment",
+        "content": "Learn currency-related terms like 千円 (sen'en - 1000 yen) and basic math for calculating totals.",
+        "quiz": {
+          "questions": [
+            {
+              "question": "What does '千円 (sen'en)' mean?",
+              "options": ["1000 yen", "500 yen", "10 yen"],
+              "answer": "1000 yen"
+            },
+            {
+              "question": "How do you say 'yen' in Japanese?",
+              "options": ["円 (en)", "金 (kin)", "値 (ne)"],
+              "answer": "円 (en)"
+            }
+          ]
+        }
+      },
+      {
+        "title": "Step 4: Practice Tasks",
+        "content": "Role-play ordering food in a restaurant and simulate shopping for items in a store."
+      }
+    ]
+  },
+
+
+
+
+
+
+
+  {
+    "id": 4,
+    "title": "Lesson 4: Travel and Communication Vocabulary",
+    "description": "Prepare learners for traveling and engaging with Japanese speakers.",
+    "content": "This lesson covers transportation, lodging, and emergency vocabulary.",
+    "image": "/images/japanese_travel.jpg",
+    "steps": [
+      {
+        "title": "Step 1: Transportation",
+        "content": "Learn terms like 飛行機 (hikouki - airplane) and 電車 (densha - train), and phrases like どこですか？ (Doko desu ka? - Where is it?).",
+        "quiz": {
+          "questions": [
+            {
+              "question": "What does '電車 (densha)' mean?",
+              "options": ["Train", "Airplane", "Taxi"],
+              "answer": "Train"
+            },
+            {
+              "question": "How do you say 'Where is it?' in Japanese?",
+              "options": ["どこですか？ (Doko desu ka?)", "何ですか？ (Nan desu ka?)", "いつですか？ (Itsu desu ka?)"],
+              "answer": "どこですか？ (Doko desu ka?)"
+            }
+          ]
+        }
+      },
+      {
+        "title": "Step 2: Lodging and Accommodation",
+        "content": "Learn words like ホテル (hoteru - hotel) and 部屋 (heya - room), and phrases like 部屋がありますか？ (Heya ga arimasu ka? - Do you have a room?).",
+        "quiz": {
+          "questions": [
+            {
+              "question": "What is the Japanese word for 'room'?",
+              "options": ["部屋 (heya)", "ホテル (hoteru)", "場所 (basho)"],
+              "answer": "部屋 (heya)"
+            },
+            {
+              "question": "How do you ask 'Do you have a room?' in Japanese?",
+              "options": ["部屋がありますか？ (Heya ga arimasu ka?)", "ここですか？ (Koko desu ka?)", "空いていますか？ (Aiteimasu ka?)"],
+              "answer": "部屋がありますか？ (Heya ga arimasu ka?)"
+            }
+          ]
+        }
+      },
+      {
+        "title": "Step 3: Emergency Situations",
+        "content": "Learn emergency-related vocabulary like 病院 (byouin - hospital) and 警察 (keisatsu - police), and phrases like 助けてください！ (Tasukete kudasai! - Please help!).",
+        "quiz": {
+          "questions": [
+            {
+              "question": "What does '警察 (keisatsu)' mean?",
+              "options": ["Police", "Hospital", "Fire Station"],
+              "answer": "Police"
+            },
+            {
+              "question": "How do you say 'Please help!' in Japanese?",
+              "options": ["助けてください！ (Tasukete kudasai!)", "お願いします！ (Onegai shimasu!)", "手伝います！ (Tetsudaimasu!)"],
+              "answer": "助けてください！ (Tasukete kudasai!)"
+            }
+          ]
+        }
+      },
+      {
+        "title": "Step 4: Practice Tasks",
+        "content": "Simulate booking a hotel room and practice asking for help in emergencies."
+      }
+    ]
+  },
+
+
+
+  
+  {
+    "id": 5,
+    "title": "Lesson 5: Advanced Vocabulary and Cultural Nuances",
+    "description": "Expand vocabulary and understand cultural contexts.",
+    "content": "This lesson explores idiomatic expressions, hobbies, and cultural phrases.",
+    "image": "/images/japanese_advanced.jpg",
+    "steps": [
+      {
+        "title": "Step 1: Idiomatic Expressions",
+        "content": "Learn phrases like 頑張って (ganbatte - Good luck) and よろしくお願いします (yoroshiku onegaishimasu - Please take care of me).",
+        "quiz": {
+          "questions": [
+            {
+              "question": "What does '頑張って (ganbatte)' mean?",
+              "options": ["Good luck", "Thank you", "Excuse me"],
+              "answer": "Good luck"
+            },
+            {
+              "question": "How do you say 'Please take care of me' in Japanese?",
+              "options": ["よろしくお願いします (yoroshiku onegaishimasu)", "どうもありがとう (doumo arigatou)", "またね (matane)"],
+              "answer": "よろしくお願いします (yoroshiku onegaishimasu)"
+            }
+          ]
+        }
+      },
+      {
+        "title": "Step 2: Hobbies and Interests",
+        "content": "Explore vocabulary like 音楽 (ongaku - music) and 映画 (eiga - movie), and practice phrases like 好きですか？ (Suki desu ka? - Do you like it?).",
+        "quiz": {
+          "questions": [
+            {
+              "question": "What is the Japanese word for 'movie'?",
+              "options": ["映画 (eiga)", "音楽 (ongaku)", "本 (hon)"],
+              "answer": "映画 (eiga)"
+            },
+            {
+              "question": "How do you ask 'Do you like it?' in Japanese?",
+              "options": ["好きですか？ (Suki desu ka?)", "大丈夫ですか？ (Daijoubu desu ka?)", "何ですか？ (Nan desu ka?)"],
+              "answer": "好きですか？ (Suki desu ka?)"
+            }
+          ]
+        }
+      },
+      {
+        "title": "Step 3: Cultural Phrases and Etiquette",
+        "content": "Learn expressions of gratitude like ご馳走様 (gochisousama - Thank you for the meal) and apologies like すみません (sumimasen - Excuse me).",
+        "quiz": {
+          "questions": [
+            {
+              "question": "What does 'ご馳走様 (gochisousama)' mean?",
+              "options": ["Thank you for the meal", "Excuse me", "Goodbye"],
+              "answer": "Thank you for the meal"
+            },
+            {
+              "question": "How do you say 'Excuse me' in Japanese?",
+              "options": ["すみません (sumimasen)", "ありがとう (arigatou)", "はい (hai)"],
+              "answer": "すみません (sumimasen)"
+            }
+          ]
+        }
+      },
+      {
+        "title": "Step 4: Practice Tasks",
+        "content": "Write a short paragraph about your favorite hobby and discuss cultural differences using learned vocabulary."
+      }
+    ]
+  },
+
+
+
+
+
+
+
+
+  {
+    "id": 6,
+    "title": "Lesson 6: Practical Application and Immersion",
+    "description": "Use acquired vocabulary in real-life scenarios.",
+    "content": "This lesson focuses on practical usage of vocabulary through conversations, media, and creative tasks.",
+    "image": "/images/japanese_practical.jpg",
+    "steps": [
+      {
+        "title": "Step 1: Conversational Practice",
+        "content": "Role-play scenarios such as ordering food, asking for directions, and introducing yourself.",
+        "quiz": {
+          "questions": [
+            {
+              "question": "How do you say 'Where is the station?' in Japanese?",
+              "options": ["駅はどこですか？ (Eki wa doko desu ka?)", "電車はどこですか？ (Densha wa doko desu ka?)", "食べ物はどこですか？ (Tabemono wa doko desu ka?)"],
+              "answer": "駅はどこですか？ (Eki wa doko desu ka?)"
+            },
+            {
+              "question": "What is the Japanese word for 'restaurant'?",
+              "options": ["レストラン (resutoran)", "ホテル (hoteru)", "店 (mise)"],
+              "answer": "レストラン (resutoran)"
+            }
+          ]
+        }
+      },
+      {
+        "title": "Step 2: Media and Content",
+        "content": "Watch a short Japanese show or listen to a song, and identify and translate familiar vocabulary.",
+        "quiz": {
+          "questions": [
+            {
+              "question": "What does '歌 (uta)' mean?",
+              "options": ["Song", "Show", "Dance"],
+              "answer": "Song"
+            },
+            {
+              "question": "How do you say 'music' in Japanese?",
+              "options": ["音楽 (ongaku)", "映画 (eiga)", "踊り (odori)"],
+              "answer": "音楽 (ongaku)"
+            }
+          ]
+        }
+      },
+      {
+        "title": "Step 3: Create Your Own Dialogues",
+        "content": "Write and act out short skits using learned vocabulary."
+      }
     ]
   }
+  
 ]

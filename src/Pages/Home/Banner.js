@@ -17,8 +17,8 @@ const Banner = () => {
                 {/* Content */}
                 <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-4 text-white">
                     <div className="text-left">
-                        <h1 className="text-4xl md:text-5xl font-bold leading-tight">
-                            Learn English Online with <br /> Professional Instructors
+                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight ">
+                        Take Your English  <br />  To The Next Level.
                         </h1>
                         <p className="mt-4 text-lg md:text-xl">
                             Your English progress is what matters the most to us. If you're not satisfied

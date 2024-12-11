@@ -1,3 +1,4 @@
+// Lesson Component
 import React, { useEffect, useState } from 'react';
 import Navbar from '../../Component/Shared/Navbar';
 import Footer from '../../Component/Shared/Footer';
@@ -5,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Lesson = () => {
     const [lessons, setLessons] = useState([]);
-    const [selectedLesson, setSelectedLesson] = useState(null);
+    const navigate = useNavigate();
 
     // Fetch lessons from the JSON file
     useEffect(() => {
@@ -15,13 +16,10 @@ const Lesson = () => {
             .catch((error) => console.error('Error fetching lessons:', error));
     }, []);
 
-   
-
-    const navigate = useNavigate();
-
     const handleViewLesson = (lesson) => {
         navigate(`/lessons/${lesson.id}`);
     };
+
     return (
         <div>
             <Navbar />
@@ -30,7 +28,6 @@ const Lesson = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {lessons.map((lesson) => (
                         <div key={lesson.id} className="bg-white shadow-md rounded-lg hover:shadow-green-500 overflow-hidden">
-                            {/* Lesson Image */}
                             <img
                                 src={lesson.image}
                                 alt={lesson.title}
@@ -50,8 +47,6 @@ const Lesson = () => {
                     ))}
                 </div>
             </div>
-
-           
             <Footer />
         </div>
     );
