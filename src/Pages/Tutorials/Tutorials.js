@@ -5,37 +5,36 @@ import Footer from '../../Component/Shared/Footer';
 const Tutorials = () => {
     const [selectedCategory, setSelectedCategory] = useState('All');
 
-    // Data for tutorials with a focus on Japanese-English vocabulary
     const videos = [
-        { 
-            title: 'Basic Greetings in Japanese and English', 
-            url: 'https://www.youtube.com/embed/xyz123abc456', 
-            category: 'Greetings', 
-            description: 'Learn how to say basic greetings like "Hello" and "Goodbye" in both Japanese and English.' 
+        {
+            title: 'Basic Greetings in Japanese and English',
+            url: 'https://www.youtube.com/embed/xyz123abc456',
+            category: 'Greetings',
+            description: 'Learn how to say basic greetings like "Hello" and "Goodbye" in both Japanese and English.'
         },
-        { 
-            title: 'Common Phrases for Travelers', 
-            url: 'https://www.youtube.com/embed/abc789xyz123', 
-            category: 'Travel', 
-            description: 'Master common travel phrases to use in Japan or English-speaking countries.' 
+        {
+            title: 'Common Phrases for Travelers',
+            url: 'https://www.youtube.com/embed/abc789xyz123',
+            category: 'Travel',
+            description: 'Master common travel phrases to use in Japan or English-speaking countries.'
         },
-        { 
-            title: 'Japanese Kanji for Beginners', 
-            url: 'https://www.youtube.com/embed/example123', 
-            category: 'Kanji', 
-            description: 'Learn beginner-level kanji characters and their English meanings.' 
+        {
+            title: 'Japanese Kanji for Beginners',
+            url: 'https://www.youtube.com/embed/example123',
+            category: 'Kanji',
+            description: 'Learn beginner-level kanji characters and their English meanings.'
         },
-        { 
-            title: 'Pronunciation Tips for Japanese and English', 
-            url: 'https://www.youtube.com/embed/kJQP7kiw5Fk', 
-            category: 'Pronunciation', 
-            description: 'Improve your pronunciation in both Japanese and English.' 
+        {
+            title: 'Pronunciation Tips for Japanese and English',
+            url: 'https://www.youtube.com/embed/kJQP7kiw5Fk',
+            category: 'Pronunciation',
+            description: 'Improve your pronunciation in both Japanese and English.'
         },
-        { 
-            title: 'Everyday Vocabulary: Food Items', 
-            url: 'https://www.youtube.com/embed/fSUn5P4kK8g', 
-            category: 'Vocabulary', 
-            description: 'Learn the names of common food items in Japanese and English.' 
+        {
+            title: 'Everyday Vocabulary: Food Items',
+            url: 'https://www.youtube.com/embed/fSUn5P4kK8g',
+            category: 'Vocabulary',
+            description: 'Learn the names of common food items in Japanese and English.'
         },
     ];
 
@@ -49,42 +48,35 @@ const Tutorials = () => {
     return (
         <div>
             <Navbar />
-            <div className="max-w-7xl pt-40 pb-40 mx-auto px-4 sm:px-6 lg:px-8 py-8">
-
-
             <div
-                className="relative bg-cover bg-center h-[70vh] flex items-center">
-                 <img src='https://www.classcentral.com/report/wp-content/uploads/2023/02/bcg_japanese_banner.png' alt=''  />
-                <div className="absolute inset-0 bg-black bg-opacity-60 z-10"></div>
-                <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-4 text-white text-center">
-                    <h1 className="text-4xl md:text-5xl font-bold leading-tight">
-                        {/* {lesson.title} */}
-                    </h1>
+                    className="relative mt-20 bg-cover bg-center h-[70vh] flex items-center"
+                    style={{
+                        backgroundImage: `url('https://www.classcentral.com/report/wp-content/uploads/2023/02/bcg_japanese_banner.png')`,
+                    }}
+                >
                 </div>
-            </div>
 
 
 
+
+            <div className="max-w-7xl pb-40 mx-auto px-4 sm:px-6 lg:px-8 py-8">
                 <h1 className="text-3xl font-bold text-center mb-8">Japanese-English Vocabulary Tutorials</h1>
 
-                {/* Category Filter */}
                 <div className="flex justify-center mb-8 space-x-4">
                     {categories.map((category) => (
                         <button
                             key={category}
                             onClick={() => setSelectedCategory(category)}
-                            className={`px-4 py-2 rounded-md text-white ${
-                                selectedCategory === category
-                                    ? 'bg-red-600'
-                                    : 'bg-gray-400 hover:bg-red-500'
-                            }`}
+                            className={`px-4 py-2 rounded-md text-white ${selectedCategory === category
+                                    ? 'bg-green-600'
+                                    : 'bg-gray-400 hover:bg-green-500'
+                                }`}
                         >
                             {category}
                         </button>
                     ))}
                 </div>
 
-                {/* Tutorials Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {filteredVideos.map((video, index) => (
                         <div key={index} className="bg-white shadow-md rounded-lg overflow-hidden">
@@ -107,7 +99,6 @@ const Tutorials = () => {
                     ))}
                 </div>
 
-                {/* No Tutorials Message */}
                 {filteredVideos.length === 0 && (
                     <p className="text-center text-gray-500 mt-6">No tutorials available for this category.</p>
                 )}

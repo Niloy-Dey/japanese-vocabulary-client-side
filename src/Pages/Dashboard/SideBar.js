@@ -9,18 +9,18 @@ const SideBar = () => {
 
     return (
         <div className="flex flex-col space-y-4 p-4">
-            <h5 className="text-lg font-semibold text-white">Dashboard</h5>
+            <h5 className="text-lg font-semibold ">Dashboard</h5>
             <nav className="flex flex-col space-y-2">
                 <Link
                     to="/dashboard"
-                    className={`flex items-center space-x-2 py-2 px-3 rounded-lg ${isActive('/dashboard') ? 'bg-blue-600' : 'hover:bg-gray-700'}`}
+                    className={`flex items-center  bg-white text-black space-x-2 py-2 px-3 rounded-lg ${isActive('/dashboard') ? 'bg-green-600 text-white' : 'hover:bg-green-700 hover:bg-green-700 hover:text-whitev'}`}
                 >
                     <FaTachometerAlt />
                     <span>Overview</span>
                 </Link>
                 <Link
-                    to="/dashboard/categories"
-                    className={`flex items-center space-x-2 py-2 px-3 rounded-lg ${isActive('/dashboard/categories') ? 'bg-blue-600' : 'hover:bg-gray-700'}`}
+                    to="/"
+                    className={`flex items-center bg-white text-black space-x-2 py-2 px-3 rounded-lg ${isActive('/dashboard/categories') ? 'bg-green-600 text-white' : 'hover:bg-green-700 hover:text-white'}`}
                 >
                     <FaPlusCircle />
                     <span>Categories</span>

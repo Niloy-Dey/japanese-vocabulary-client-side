@@ -13,12 +13,11 @@ const LessonDetails = () => {
     const [showResults, setShowResults] = useState(false);
 
     useEffect(() => {
-        // Fetch the lesson details using the ID
         fetch('/lessons.json')
             .then((response) => response.json())
             .then((data) => {
                 const selectedLesson = data.find((lesson) => lesson.id === parseInt(id));
-                if (!selectedLesson) navigate('/lessons'); // Redirect if lesson not found
+                if (!selectedLesson) navigate('/lessons'); 
                 setLesson(selectedLesson);
             })
             .catch((error) => console.error('Error fetching lesson:', error));
