@@ -14,7 +14,6 @@ import AddLesson from '../Pages/Dashboard/AddLesson.js';
 import AddVocabulary from '../Pages/Dashboard/AddVocabulary.js';
 import ManageUsers from '../Pages/Dashboard/ManageUsers.js';
 import ManageVocabularies from '../Pages/Dashboard/ManageVocabularies.js';
-import VocabularyLesson from '../Pages/VocabularyLesson/VocabularyLesson.js';
 
 const AppRoutes = () => {
     return (
@@ -27,7 +26,6 @@ const AppRoutes = () => {
             <Route path="/tutorials" element={<Tutorials />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/vocubularyLesson" element={<VocabularyLesson />} />
 
 
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Navbar from '../../Component/Shared/Navbar';
 import Footer from '../../Component/Shared/Footer';
@@ -8,8 +8,8 @@ const LessonDetails = () => {
     const navigate = useNavigate();
     const [lesson, setLesson] = useState(null);
     const [selectedStep, setSelectedStep] = useState(0);
-    const [quizAnswers, setQuizAnswers] = useState({});
-    const [showResults, setShowResults] = useState(false);
+    const [currentVocabIndex, setCurrentVocabIndex] = useState(0);
+    const audioRef = useRef(null);
 
     useEffect(() => {
         fetch('/lessons.json')
@@ -17,7 +17,7 @@ const LessonDetails = () => {
             .then((data) => {
                 const selectedLesson = data.find((lesson) => lesson.id === parseInt(id));
                 if (!selectedLesson) {
-                    navigate('/lessons'); 
+                    navigate('/lessons');
                 } else {
                     setLesson(selectedLesson);
                 }
@@ -25,103 +25,60 @@ const LessonDetails = () => {
             .catch((error) => console.error('Error fetching lesson:', error));
     }, [id, navigate]);
 
-    const handleAnswerChange = (questionIndex, selectedOption) => {
-        setQuizAnswers((prevAnswers) => ({
-            ...prevAnswers,
-            [questionIndex]: selectedOption,
-        }));
+    const playPronunciation = (audio) => {
+        if (audioRef.current) {
+            audioRef.current.src = audio;
+            audioRef.current.play();
+        }
     };
 
-    const handleSubmitQuiz = () => {
-        setShowResults(true);
+    const handleNextVocab = (vocabularies) => {
+        if (currentVocabIndex < vocabularies.length - 1) {
+            setCurrentVocabIndex(currentVocabIndex + 1);
+        }
     };
 
-    const renderQuiz = (quiz) => (
-        <div className="mt-6">
-            <h3 className="text-xl font-bold mb-4">Quiz</h3>
-            {quiz.questions.map((question, index) => (
-                <div key={index} className="mb-4">
-                    <p className="text-gray-800 font-medium">{question.question}</p>
-                    <div className="mt-2 space-y-2">
-                        {question.options.map((option, optionIndex) => (
-                            <label
-                                key={optionIndex}
-                                className="flex items-center space-x-2 cursor-pointer"
-                            >
-                                <input
-                                    type="radio"
-                                    name={`question-${index}`}
-                                    value={option}
-                                    checked={quizAnswers[index] === option}
-                                    onChange={() => handleAnswerChange(index, option)}
-                                    className="form-radio text-blue-600"
-                                />
-                                <span className="text-gray-700">{option}</span>
-                            </label>
-                        ))}
-                    </div>
-                </div>
-            ))}
+    const handlePreviousVocab = () => {
+        if (currentVocabIndex > 0) {
+            setCurrentVocabIndex(currentVocabIndex - 1);
+        }
+    };
 
-            <button
-                onClick={handleSubmitQuiz}
-                className="mt-4 bg-green-500 text-white px-4 py-2 rounded hover:bg-black"
-            >
-                Submit Quiz
-            </button>
+    if (!lesson) return <div className="flex justify-center items-center h-screen"><p className="text-xl font-semibold">Loading...</p></div>;
 
-            {showResults && (
-                <div className="mt-6 p-4 bg-green-100 rounded">
-                    <h4 className="text-lg font-bold mb-2">Results</h4>
-                    {quiz.questions.map((question, index) => (
-                        <p key={index} className="text-gray-800">
-                            {question.question} - {quizAnswers[index] === question.answer ? 'Correct' : 'Incorrect'}
-                        </p>
-                    ))}
-                </div>
-            )}
-        </div>
-    );
-
-    if (!lesson) return <p>Loading...</p>; // Loading state if lesson is null
-
-    // Defensive check to ensure steps exist before rendering
-    if (!lesson.steps || lesson.steps.length === 0) {
-        return <p>No steps available for this lesson.</p>; // Handle case where steps are missing
-    }
+    const { steps } = lesson;
+    const currentStep = steps[selectedStep];
+    const vocabularies = currentStep.vocabularies || [];
 
     return (
         <div>
             <Navbar />
             <div
-                className="relative bg-cover bg-center h-[70vh] flex items-center"
-                style={{
-                    backgroundImage: `url(${lesson.image})`,
-                }}
+                className="relative bg-cover bg-center h-[50vh] flex items-center justify-center"
+                style={{ backgroundImage: `url(${lesson.image})` }}
             >
-                <div className="absolute inset-0 bg-black bg-opacity-60 z-10"></div>
-                <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-4 text-white text-center">
-                    <h1 className="text-4xl md:text-5xl font-bold leading-tight">
-                        {lesson.title}
-                    </h1>
+                <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+                <div className="relative z-10 text-center text-white">
+                    <h1 className="text-4xl md:text-5xl font-bold mb-4">{lesson.title}</h1>
+                    <p className="text-lg md:text-xl max-w-3xl mx-auto">{lesson.description}</p>
                 </div>
             </div>
 
-            <div className="max-w-7xl mb-40 mx-auto px-4 sm:px-6 lg:px-8 py-8 grid grid-cols-1 lg:grid-cols-4 gap-6">
-                <div className="bg-gray-100 p-4 rounded-lg lg:col-span-1">
-                    <h2 className="text-lg font-bold mb-4">Lesson Steps</h2>
-                    <ul className="space-y-2">
-                        {lesson.steps.map((step, index) => (
+            <div className="max-w-7xl mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-4 gap-6">
+                {/* Sidebar */}
+                <div className="bg-white shadow-md rounded-lg p-4">
+                    <h2 className="text-lg font-bold mb-4 text-gray-700">Lesson Steps</h2>
+                    <ul className="space-y-3">
+                        {steps.map((step, index) => (
                             <li
                                 key={index}
-                                className={`p-3 rounded-md cursor-pointer ${selectedStep === index
+                                className={`p-3 rounded-lg cursor-pointer ${selectedStep === index
                                     ? 'bg-green-500 text-white'
-                                    : 'bg-white text-gray-700 hover:bg-green-100'
-                                    }`}
+                                    : 'bg-gray-100 text-gray-700 hover:bg-green-100'
+                                    } transition-all`}
                                 onClick={() => {
                                     setSelectedStep(index);
-                                    setShowResults(false);
-                                    setQuizAnswers({});
+                                    setCurrentVocabIndex(0);
                                 }}
                             >
                                 {step.title}
@@ -130,19 +87,64 @@ const LessonDetails = () => {
                     </ul>
                 </div>
 
+                {/* Main Content */}
                 <div className="lg:col-span-3 bg-white shadow-lg rounded-lg p-6">
-                    <h2 className="text-2xl font-bold">
-                        {lesson.steps[selectedStep]?.title || "No Title Available"}
-                    </h2>
-                    <p className="mt-4 text-gray-700">
-                        {lesson.steps[selectedStep]?.content || "No content available for this step."}
-                    </p>
+                    <h2 className="text-3xl font-bold mb-4 text-gray-800">{currentStep.title}</h2>
+                    <p className="text-gray-600 mb-6">{currentStep.content}</p>
 
-                    {lesson.steps[selectedStep]?.quiz &&
-                        renderQuiz(lesson.steps[selectedStep].quiz)}
+                    {vocabularies.length > 0 && (
+                        <div className="text-center">
+                            <h3
+                                className="text-4xl font-bold mb-4 cursor-pointer hover:text-green-500 transition"
+                                onClick={() => playPronunciation(vocabularies[currentVocabIndex].audio)}
+                            >
+                                {vocabularies[currentVocabIndex].word}
+                            </h3>
+                            <audio ref={audioRef} />
+
+                            <p className="text-lg text-gray-600 mb-2">
+                                Pronunciation: <span className="font-bold">{vocabularies[currentVocabIndex].pronunciation}</span>
+                            </p>
+                            <p className="text-gray-700 mb-6">{vocabularies[currentVocabIndex].whenToSay}</p>
+
+                            <div className="flex justify-center space-x-4">
+                                <button
+                                    onClick={handlePreviousVocab}
+                                    disabled={currentVocabIndex === 0}
+                                    className={`px-6 py-2 rounded-lg ${currentVocabIndex === 0
+                                        ? 'bg-gray-300 cursor-not-allowed'
+                                        : 'bg-green-500 text-white hover:bg-green-600 transition'
+                                        }`}
+                                >
+                                    Previous
+                                </button>
+                                <button
+                                    onClick={() => handleNextVocab(vocabularies)}
+                                    disabled={currentVocabIndex === vocabularies.length - 1}
+                                    className={`px-6 py-2 rounded-lg ${currentVocabIndex === vocabularies.length - 1
+                                        ? 'bg-gray-300 cursor-not-allowed'
+                                        : 'bg-green-500 text-white hover:bg-green-600 transition'
+                                        }`}
+                                >
+                                    Next
+                                </button>
+                            </div>
+                        </div>
+                    )}
+
+                    {selectedStep === steps.length - 1 && (
+                        <div className="text-center mt-8">
+                            <button
+                                onClick={() => navigate('/lessons')}
+                                className="bg-green-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-600 transition"
+                            >
+                                Complete Lesson
+                            </button>
+                        </div>
+                    )}
                 </div>
-
             </div>
+
             <Footer />
         </div>
     );
@@ -151,149 +153,3 @@ const LessonDetails = () => {
 export default LessonDetails;
 
 
-
-
-// import React, { useState, useEffect } from 'react';
-// import { useParams, useNavigate } from 'react-router-dom';
-// import Navbar from '../../Component/Shared/Navbar';
-// import Footer from '../../Component/Shared/Footer';
-
-// const LessonDetails = () => {
-//     const { id } = useParams();
-//     const navigate = useNavigate();
-//     const [lesson, setLesson] = useState(null);
-//     const [selectedStep, setSelectedStep] = useState(0);
-//     const [quizAnswers, setQuizAnswers] = useState({});
-//     const [showResults, setShowResults] = useState(false);
-
-//     useEffect(() => {
-//         fetch('/lessons.json')
-//             .then((response) => response.json())
-//             .then((data) => {
-//                 const selectedLesson = data.find((lesson) => lesson.id === parseInt(id));
-//                 if (!selectedLesson) navigate('/lessons'); 
-//                 setLesson(selectedLesson);
-//             })
-//             .catch((error) => console.error('Error fetching lesson:', error));
-//     }, [id, navigate]);
-
-//     const handleAnswerChange = (questionIndex, selectedOption) => {
-//         setQuizAnswers((prevAnswers) => ({
-//             ...prevAnswers,
-//             [questionIndex]: selectedOption,
-//         }));
-//     };
-
-//     const handleSubmitQuiz = () => {
-//         setShowResults(true);
-//     };
-
-//     const renderQuiz = (quiz) => (
-//         <div className="mt-6">
-//             <h3 className="text-xl font-bold mb-4">Quiz</h3>
-//             {quiz.questions.map((question, index) => (
-//                 <div key={index} className="mb-4">
-//                     <p className="text-gray-800 font-medium">{question.question}</p>
-//                     <div className="mt-2 space-y-2">
-//                         {question.options.map((option, optionIndex) => (
-//                             <label
-//                                 key={optionIndex}
-//                                 className="flex items-center space-x-2 cursor-pointer"
-//                             >
-//                                 <input
-//                                     type="radio"
-//                                     name={`question-${index}`}
-//                                     value={option}
-//                                     checked={quizAnswers[index] === option}
-//                                     onChange={() => handleAnswerChange(index, option)}
-//                                     className="form-radio text-blue-600"
-//                                 />
-//                                 <span className="text-gray-700">{option}</span>
-//                             </label>
-//                         ))}
-//                     </div>
-//                 </div>
-//             ))}
-
-//             <button
-//                 onClick={handleSubmitQuiz}
-//                 className="mt-4 bg-green-500 text-white px-4 py-2 rounded hover:bg-black"
-//             >
-//                 Submit Quiz
-//             </button>
-
-//             {showResults && (
-//                 <div className="mt-6 p-4 bg-green-100 rounded">
-//                     <h4 className="text-lg font-bold mb-2">Results</h4>
-//                     {quiz.questions.map((question, index) => (
-//                         <p key={index} className="text-gray-800">
-//                             {question.question} - {quizAnswers[index] === question.answer ? 'Correct' : 'Incorrect'}
-//                         </p>
-//                     ))}
-//                 </div>
-//             )}
-//         </div>
-//     );
-
-//     if (!lesson) return null; 
-
-//     return (
-//         <div>
-//             <Navbar />
-//             <div
-//                 className="relative bg-cover bg-center h-[70vh] flex items-center"
-//                 style={{
-//                     backgroundImage: `url(${lesson.image})`,
-//                 }}
-//             >
-//                 <div className="absolute inset-0 bg-black bg-opacity-60 z-10"></div>
-//                 <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-4 text-white text-center">
-//                     <h1 className="text-4xl md:text-5xl font-bold leading-tight">
-//                         {lesson.title}
-//                     </h1>
-//                 </div>
-//             </div>
-
-
-
-//             <div className="max-w-7xl mb-40 mx-auto px-4 sm:px-6 lg:px-8 py-8 grid grid-cols-1 lg:grid-cols-4 gap-6">
-//                 <div className="bg-gray-100 p-4 rounded-lg lg:col-span-1">
-//                     <h2 className="text-lg font-bold mb-4">Lesson Steps</h2>
-//                     <ul className="space-y-2">
-//                         {lesson.steps.map((step, index) => (
-//                             <li
-//                                 key={index}
-//                                 className={`p-3 rounded-md cursor-pointer ${selectedStep === index
-//                                     ? 'bg-green-500 text-white'
-//                                     : 'bg-white text-gray-700 hover:bg-green-100'
-//                                     }`}
-//                                 onClick={() => {
-//                                     setSelectedStep(index);
-//                                     setShowResults(false);
-//                                     setQuizAnswers({});
-//                                 }}
-//                             >
-//                                 {step.title}
-//                             </li>
-//                         ))}
-//                     </ul>
-//                 </div>
-
-//                 <div className="lg:col-span-3 bg-white shadow-lg rounded-lg p-6">
-//                     <h2 className="text-2xl font-bold">
-//                         {lesson.steps[selectedStep].title}
-//                     </h2>
-//                     <p className="mt-4 text-gray-700">
-//                         {lesson.steps[selectedStep].content}
-//                     </p>
-
-//                     {lesson.steps[selectedStep].quiz &&
-//                         renderQuiz(lesson.steps[selectedStep].quiz)}
-//                 </div>
-//             </div>
-//             <Footer />
-//         </div>
-//     );
-// };
-
-// export default LessonDetails;
