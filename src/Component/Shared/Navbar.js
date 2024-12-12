@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import logo from '../../../src/images/logo.png'
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -9,13 +9,16 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 w-full bg-white text-black z-30"> {/* Make Navbar opaque */}
+    <nav className="fixed top-0 shadow-md shadow-green-300 left-0 w-full bg-white text-black z-30"> {/* Make Navbar opaque */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* Logo */}
           <div className="flex-shrink-0">
             <a href="/" className="text-xl font-bold">
-              Logo
+              <img
+                src={logo}
+                alt="Logo"
+                className="h-32 w-auto object-contain"
+              />
             </a>
           </div>
 
@@ -30,7 +33,7 @@ const Navbar = () => {
             <a href="/lessons" className="hover:bg-white hover:bg-opacity-20 px-3 py-2 rounded-md">
               Lessons
             </a>
-            
+
             <a href="/tutorials" className="hover:bg-white hover:bg-opacity-20 px-3 py-2 rounded-md">
               Tutorials
             </a>

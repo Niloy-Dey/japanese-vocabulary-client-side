@@ -32,7 +32,7 @@ const AppRoutes = () => {
 
             {/* Dashboard Routes */}
             <Route path="/dashboard" element={<Dashboard />}>
-                <Route index element={<Overview />} /> {/* Default dashboard child */}
+                <Route index element={<ManageLessons />} /> 
                 <Route path="lessons" element={<ManageLessons />} />
                 <Route path="add-lesson" element={<AddLesson />} />
                 <Route path="add-vocabulary" element={<AddVocabulary />} />

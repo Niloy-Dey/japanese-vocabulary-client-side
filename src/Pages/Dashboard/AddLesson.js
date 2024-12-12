@@ -1,158 +1,225 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const AddLesson = () => {
-    const lesson = {
-        id: 1,
-        title: "Lesson 1: Foundations of Japanese Vocabulary",
-        description: "Build a strong base in essential vocabulary for everyday life.",
-        image: "https://www3.nhk.or.jp/nhkworld/en/learnjapanese/assets/images/programs/conversation.jpg",
-        steps: [
-            {
-                title: "Step 1: Greetings and Basic Expressions",
-                content: "Learn common greetings and polite expressions.",
-                vocabularies: [
-                    {
-                        word: "こんにちは",
-                        pronunciation: "Konnichiwa",
-                        whenToSay: "Use this to greet someone during the day (Hello).",
-                        meaning: "Hello",
-                        audio: "/audio/konnichiwa.mp3"
-                    },
-                    {
-                        word: "ありがとう",
-                        pronunciation: "Arigatou",
-                        whenToSay: "Say this to thank someone (Thank you).",
-                        meaning: "Thank you",
-                        audio: "/audio/arigatou.mp3"
-                    }
-                ]
-            },
-            {
-                title: "Step 2: Numbers and Counting",
-                content: "Learn numbers and age-related terms.",
-                vocabularies: [
-                    {
-                        word: "いち",
-                        pronunciation: "Ichi",
-                        whenToSay: "Use this to say the number 1.",
-                        meaning: "One",
-                        audio: "/audio/ichi.mp3"
-                    },
-                    {
-                        word: "に",
-                        pronunciation: "Ni",
-                        whenToSay: "Use this to say the number 2.",
-                        meaning: "Two",
-                        audio: "/audio/ni.mp3"
-                    },
-                    {
-                        word: "さん",
-                        pronunciation: "San",
-                        whenToSay: "Use this to say the number 3.",
-                        meaning: "Three",
-                        audio: "/audio/san.mp3"
-                    }
-                ]
-            },
-            {
-                title: "Step 3: Everyday Objects",
-                content: "Learn words for common everyday items.",
-                vocabularies: [
-                    {
-                        word: "本",
-                        pronunciation: "Hon",
-                        whenToSay: "Use this to refer to a book.",
-                        meaning: "Book",
-                        audio: "/audio/hon.mp3"
-                    },
-                    {
-                        word: "車",
-                        pronunciation: "Kuruma",
-                        whenToSay: "Use this to refer to a car.",
-                        meaning: "Car",
-                        audio: "/audio/kuruma.mp3"
-                    },
-                    {
-                        word: "時計",
-                        pronunciation: "Tokei",
-                        whenToSay: "Use this to refer to a clock or watch.",
-                        meaning: "Clock/Watch",
-                        audio: "/audio/tokei.mp3"
-                    }
-                ]
-            },
-            {
-                title: "Step 4: Family and Relationships",
-                content: "Learn words for family members and relationships.",
-                vocabularies: [
-                    {
-                        word: "母",
-                        pronunciation: "Haha",
-                        whenToSay: "Use this to refer to your mother.",
-                        meaning: "Mother",
-                        audio: "/audio/haha.mp3"
-                    },
-                    {
-                        word: "父",
-                        pronunciation: "Chichi",
-                        whenToSay: "Use this to refer to your father.",
-                        meaning: "Father",
-                        audio: "/audio/chichi.mp3"
-                    },
-                    {
-                        word: "兄",
-                        pronunciation: "Ani",
-                        whenToSay: "Use this to refer to your older brother.",
-                        meaning: "Older Brother",
-                        audio: "/audio/ani.mp3"
-                    }
-                ]
-            },
-            {
-                title: "Step 5: Complete the Course",
-                content: "Congratulations on completing the course!",
-                vocabularies: [],
-                completeButton: true
-            }
-        ]
+    const [lesson, setLesson] = useState({
+        title: "",
+        description: "",
+        image: "",
+        steps: []
+    });
+
+    const [currentStep, setCurrentStep] = useState({
+        title: "",
+        content: "",
+        vocabularies: []
+    });
+
+    const [currentVocabulary, setCurrentVocabulary] = useState({
+        word: "",
+        pronunciation: "",
+        whenToSay: "",
+        meaning: "",
+        audio: ""
+    });
+
+    const handleLessonChange = (e) => {
+        const { name, value } = e.target;
+        setLesson({ ...lesson, [name]: value });
+    };
+
+    const handleStepChange = (e) => {
+        const { name, value } = e.target;
+        setCurrentStep({ ...currentStep, [name]: value });
+    };
+
+    const handleVocabularyChange = (e) => {
+        const { name, value } = e.target;
+        setCurrentVocabulary({ ...currentVocabulary, [name]: value });
+    };
+
+    const addVocabulary = () => {
+        setCurrentStep({
+            ...currentStep,
+            vocabularies: [...currentStep.vocabularies, currentVocabulary]
+        });
+        setCurrentVocabulary({ word: "", pronunciation: "", whenToSay: "", meaning: "", audio: "" });
+    };
+
+    const addStep = () => {
+        setLesson({
+            ...lesson,
+            steps: [...lesson.steps, currentStep]
+        });
+        setCurrentStep({ title: "", content: "", vocabularies: [] });
+    };
+
+    const handleSubmit = () => {
+        console.log("Lesson Submitted:", lesson);
+        setLesson({ title: "", description: "", image: "", steps: [] });
     };
 
     return (
-        <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
-            <h1>{lesson.title}</h1>
-            <p>{lesson.description}</p>
-            <img src={lesson.image} alt={lesson.title} style={{ maxWidth: '100%', borderRadius: '8px' }} />
+        <div className="p-6 py-20 card font-sans">
+            <h1 className="text-2xl font-bold mb-6">Add New Lesson</h1>
 
-            {lesson.steps.map((step, index) => (
-                <div key={index} style={{ marginTop: '20px', padding: '10px', border: '1px solid #ddd', borderRadius: '8px' }}>
-                    <h2>{step.title}</h2>
-                    <p>{step.content}</p>
+            <div className="mb-4">
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Lesson Title:
+                </label>
+                <input
+                    type="text"
+                    name="title"
+                    value={lesson.title}
+                    onChange={handleLessonChange}
+                    className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-indigo-200"
+                />
+            </div>
 
-                    {step.vocabularies && step.vocabularies.length > 0 && (
-                        <div style={{ marginTop: '10px' }}>
-                            <h3>Vocabularies:</h3>
-                            <ul>
-                                {step.vocabularies.map((vocab, vocabIndex) => (
-                                    <li key={vocabIndex} style={{ marginBottom: '10px' }}>
-                                        <strong>{vocab.word}</strong> ({vocab.pronunciation}) - {vocab.meaning}
-                                        <p><em>{vocab.whenToSay}</em></p>
-                                        <audio controls>
-                                            <source src={vocab.audio} type="audio/mpeg" />
-                                            Your browser does not support the audio element.
-                                        </audio>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    )}
+            <div className="mb-4">
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Description:
+                </label>
+                <textarea
+                    name="description"
+                    value={lesson.description}
+                    onChange={handleLessonChange}
+                    className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-indigo-200"
+                    rows="4"
+                ></textarea>
+            </div>
 
-                    {step.completeButton && (
-                        <button style={{ padding: '10px 20px', backgroundColor: '#4CAF50', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>
-                            Complete Lesson
-                        </button>
-                    )}
+            <div className="mb-4">
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Image URL:
+                </label>
+                <input
+                    type="text"
+                    name="image"
+                    value={lesson.image}
+                    onChange={handleLessonChange}
+                    className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-indigo-200"
+                />
+            </div>
+
+            <div className="border border-gray-300 rounded-md p-4 mb-6">
+                <h2 className="text-lg font-semibold mb-4">Add Step</h2>
+
+                <div className="mb-4">
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Step Title:
+                    </label>
+                    <input
+                        type="text"
+                        name="title"
+                        value={currentStep.title}
+                        onChange={handleStepChange}
+                        className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-indigo-200"
+                    />
                 </div>
-            ))}
+
+                <div className="mb-4">
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Step Content:
+                    </label>
+                    <textarea
+                        name="content"
+                        value={currentStep.content}
+                        onChange={handleStepChange}
+                        className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-indigo-200"
+                        rows="4"
+                    ></textarea>
+                </div>
+
+                <div className="border border-gray-200 rounded-md p-4 mb-4">
+                    <h3 className="text-md font-semibold mb-4">Add Vocabulary</h3>
+
+                    <div className="mb-4">
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                            Word:
+                        </label>
+                        <input
+                            type="text"
+                            name="word"
+                            value={currentVocabulary.word}
+                            onChange={handleVocabularyChange}
+                            className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-indigo-200"
+                        />
+                    </div>
+
+                    <div className="mb-4">
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                            Pronunciation:
+                        </label>
+                        <input
+                            type="text"
+                            name="pronunciation"
+                            value={currentVocabulary.pronunciation}
+                            onChange={handleVocabularyChange}
+                            className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-indigo-200"
+                        />
+                    </div>
+
+                    <div className="mb-4">
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                            When to Say:
+                        </label>
+                        <input
+                            type="text"
+                            name="whenToSay"
+                            value={currentVocabulary.whenToSay}
+                            onChange={handleVocabularyChange}
+                            className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-indigo-200"
+                        />
+                    </div>
+
+                    <div className="mb-4">
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                            Meaning:
+                        </label>
+                        <input
+                            type="text"
+                            name="meaning"
+                            value={currentVocabulary.meaning}
+                            onChange={handleVocabularyChange}
+                            className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-indigo-200"
+                        />
+                    </div>
+
+                    <div className="mb-4">
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                            Audio URL:
+                        </label>
+                        <input
+                            type="text"
+                            name="audio"
+                            value={currentVocabulary.audio}
+                            onChange={handleVocabularyChange}
+                            className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-indigo-200"
+                        />
+                    </div>
+
+                    <button
+                        onClick={addVocabulary}
+                        className="px-4 py-2 bg-blue-500 text-white rounded-md shadow-sm hover:bg-blue-600"
+                    >
+                        Add Vocabulary
+                    </button>
+                </div>
+
+                <button
+                    onClick={addStep}
+                    className="px-4 py-2 bg-green-500 text-white rounded-md shadow-sm hover:bg-green-600"
+                >
+                    Add Step
+                </button>
+            </div>
+
+            <button
+                onClick={handleSubmit}
+                className="px-6 py-2 bg-indigo-500 text-white rounded-md shadow-sm hover:bg-indigo-600"
+            >
+                Submit Lesson
+            </button>
         </div>
     );
 };
