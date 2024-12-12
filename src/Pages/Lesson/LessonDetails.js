@@ -105,6 +105,9 @@ const LessonDetails = () => {
                             <p className="text-lg text-gray-600 mb-2">
                                 Pronunciation: <span className="font-bold">{vocabularies[currentVocabIndex].pronunciation}</span>
                             </p>
+                            <p className="text-lg text-gray-600 mb-2">
+                            meaning: <span className="font-bold">{vocabularies[currentVocabIndex].meaning}</span>
+                            </p>
                             <p className="text-gray-700 mb-6">{vocabularies[currentVocabIndex].whenToSay}</p>
 
                             <div className="flex justify-center space-x-4">
