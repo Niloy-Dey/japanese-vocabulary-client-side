@@ -11,7 +11,7 @@ const Lesson = () => {
 
     // Fetch lessons from the backend API
     useEffect(() => {
-        fetch('http://localhost:5000/api/lessons')
+        fetch('https://japanese-vocabulary-chi.vercel.app/api/lessons')
             .then((response) => {
                 if (!response.ok) {
                     throw new Error('Failed to fetch lessons');

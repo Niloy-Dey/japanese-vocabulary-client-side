@@ -1,8 +1,68 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Navbar from '../../Component/Shared/Navbar';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
+import auth from '../../firebase.init';
 
 const Register = () => {
+    const { register, formState: { errors }, handleSubmit } = useForm();
+    const [createUserWithEmailAndPassword, user, loading, error] = useCreateUserWithEmailAndPassword(auth);
+    const [ gUser, gLoading, gError] = useSignInWithGoogle(auth);
+    const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+    const [loginData, setLoginData] = useState({});
+    const navigate = useNavigate();
+    
+    let signInError;
+
+    // Handle errors from various operations
+    if (error || gError || updateError) {
+        signInError = <p className='text-red-500'><small>{error?.message || gError?.message || updateError?.message}</small></p>;
+    }
+
+    // Redirect if user is successfully registered
+    if (user || gUser) {
+        navigate('/home');
+    }
+
+
+    // Form submission handler
+    const onSubmit = async (data) => {
+        const { name, email, password } = data;
+
+        // Register user with email and password
+        await createUserWithEmailAndPassword(email, password);
+
+        // Update the profile with the user's name
+        await updateProfile({ displayName: name });
+
+        // Prepare the user object
+        const userObject = {
+            name,
+            email,
+            password, // You would likely want to hash passwords on the server, not send plain text
+            role: 'user'
+        };
+
+        // Send user data to your backend
+        fetch('http://localhost:5000/user', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(userObject)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.insertedId) {
+                    console.log("User data saved to backend successfully");
+                }
+            });
+
+        setLoginData(userObject);
+        navigate('/home');
+    };
+
     return (
         <div>
             <Navbar />
@@ -19,79 +79,56 @@ const Register = () => {
                 <div className="relative z-20 w-full sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl bg-white bg-opacity-30 backdrop-blur-md rounded-lg p-8 shadow-lg lg:ml-40 mx-4 mt-40">
                     <h2 className="text-white text-lg font-medium title-font mb-3 text-center lg:text-left">Register</h2>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        {/* Full Name */}
-                        <div className="">
-                            <label htmlFor="full-name" className="leading-7 text-sm text-white">
-                                Full Name
-                            </label>
-                            <input
-                                type="text"
-                                id="full-name"
-                                name="full-name"
-                                className="w-full bg-transparent rounded border border-gray-300 focus:border-green-500 focus:ring-2 focus:ring-green-500 text-base outline-none text-white py-2 px-4 leading-8 transition-colors duration-200 ease-in-out"
-                            />
-                        </div>
-
-                        {/* Email */}
-                        <div className="">
-                            <label htmlFor="email" className="leading-7 text-sm text-white">
-                                Email
-                            </label>
-                            <input
-                                type="email"
-                                id="email"
-                                name="email"
-                                className="w-full bg-transparent rounded border border-gray-300 focus:border-green-500 focus:ring-2 focus:ring-green-500 text-base outline-none text-white py-2 px-4 leading-8 transition-colors duration-200 ease-in-out"
-                            />
-                        </div>
-
-                        {/* Photo Upload */}
-                        <div className="">
-                            <label htmlFor="photo-upload" className="leading-7 text-sm text-white">
-                                Upload Photo
-                            </label>
-                            <div className="flex items-center justify-between border border-gray-300 bg-transparent rounded py-2 px-4 focus-within:ring-2 focus-within:ring-green-500">
-                                {/* Hidden File Input */}
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            {/* Full Name */}
+                            <div className="">
+                                <label htmlFor="name" className="leading-7 text-sm text-white">Full Name</label>
                                 <input
-                                    type="file"
-                                    id="photo-upload"
-                                    name="photo-upload"
-                                    className="hidden"
+                                    type="text"
+                                    id="name"
+                                    className="w-full bg-transparent rounded border border-gray-300 focus:border-green-500 focus:ring-2 focus:ring-green-500 text-base outline-none text-white py-2 px-4 leading-8 transition-colors duration-200 ease-in-out"
+                                    {...register("name", { required: "Full Name is required" })}
                                 />
+                                {errors.name && <p className="text-red-500">{errors.name.message}</p>}
+                            </div>
 
-                                {/* Custom Button to Trigger File Selection */}
-                                <button
-                                    type="button"
-                                    className="bg-green-500 text-white px-4 py-1 rounded hover:bg-green-600"
-                                    onClick={() => document.getElementById('photo-upload').click()}
-                                >
-                                    Choose Photo
-                                </button>
+                            {/* Email */}
+                            <div className="">
+                                <label htmlFor="email" className="leading-7 text-sm text-white">Email</label>
+                                <input
+                                    type="email"
+                                    id="email"
+                                    className="w-full bg-transparent rounded border border-gray-300 focus:border-green-500 focus:ring-2 focus:ring-green-500 text-base outline-none text-white py-2 px-4 leading-8 transition-colors duration-200 ease-in-out"
+                                    {...register("email", { required: "Email is required" })}
+                                />
+                                {errors.email && <p className="text-red-500">{errors.email.message}</p>}
+                            </div>
+
+                            {/* Password */}
+                            <div className="">
+                                <label htmlFor="password" className="leading-7 text-sm text-white">Password</label>
+                                <input
+                                    type="password"
+                                    id="password"
+                                    className="w-full bg-transparent rounded border border-gray-300 focus:border-green-500 focus:ring-2 focus:ring-green-500 text-base outline-none text-white py-2 px-4 leading-8 transition-colors duration-200 ease-in-out"
+                                    {...register("password", { required: "Password is required" })}
+                                />
+                                {errors.password && <p className="text-red-500">{errors.password.message}</p>}
                             </div>
                         </div>
 
-                        {/* Password */}
-                        <div className="">
-                            <label htmlFor="password" className="leading-7 text-sm text-white">
-                                Password
-                            </label>
-                            <input
-                                type="password"
-                                id="password"
-                                name="password"
-                                className="w-full bg-transparent rounded border border-gray-300 focus:border-green-500 focus:ring-2 focus:ring-green-500 text-base outline-none text-white py-2 px-4 leading-8 transition-colors duration-200 ease-in-out"
-                            />
-                        </div>
+                        {/* Error message */}
+                        {signInError}
+
+                        <button type="submit" className="w-full mt-4 text-white bg-green-500 border-0 py-2 px-8 focus:outline-none hover:bg-green-600 rounded text-lg">
+                            Register
+                        </button>
+                    </form>
+
+                    <div className="mt-4 text-center">
+                        <p className="text-white text-sm">Already have an account? <Link to="/login" className="text-green-500">Login</Link></p>
                     </div>
-
-                    <button className="w-full mt-4 text-white bg-green-500 border-0 py-2 px-8 focus:outline-none hover:bg-green-600 rounded text-lg">
-                        Register
-                    </button>
-
-                    <p className="text-sm text-white mt-3 text-center">
-                        If you have any account, please <span><Link className='text-green-500' to="/login">Login</Link></span>
-                    </p>
                 </div>
             </div>
         </div>

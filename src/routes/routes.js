@@ -14,6 +14,7 @@ import AddLesson from '../Pages/Dashboard/AddLesson.js';
 import AddVocabulary from '../Pages/Dashboard/AddVocabulary.js';
 import ManageUsers from '../Pages/Dashboard/ManageUsers.js';
 import ManageVocabularies from '../Pages/Dashboard/ManageVocabularies.js';
+import AddNewLesson from '../Pages/Dashboard/AddNewLesson.js';
 
 const AppRoutes = () => {
     return (
@@ -34,6 +35,7 @@ const AppRoutes = () => {
             <Route path="/dashboard" element={<Dashboard />}>
                 <Route index element={<ManageLessons />} /> 
                 <Route path="lessons" element={<ManageLessons />} />
+                <Route path="newlessons" element={<AddNewLesson />} />
                 <Route path="add-lesson" element={<AddLesson />} />
                 <Route path="add-vocabulary" element={<AddVocabulary />} />
                 <Route path="manage-users" element={<ManageUsers />} />

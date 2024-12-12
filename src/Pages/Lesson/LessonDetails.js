@@ -4,22 +4,22 @@ import Navbar from '../../Component/Shared/Navbar';
 import Footer from '../../Component/Shared/Footer';
 
 const LessonDetails = () => {
-    const { id } = useParams();
+    const { id } = useParams(); // Get the lesson ID from the URL
     const navigate = useNavigate();
-    const [lesson, setLesson] = useState(null);
-    const [selectedStep, setSelectedStep] = useState(0);
-    const [currentVocabIndex, setCurrentVocabIndex] = useState(0);
-    const audioRef = useRef(null);
+    const [lesson, setLesson] = useState(null); // State to hold the lesson data
+    const [selectedStep, setSelectedStep] = useState(0); // State to handle current step
+    const [currentVocabIndex, setCurrentVocabIndex] = useState(0); // State to handle vocab index
+    const audioRef = useRef(null); // Ref to control audio playback
 
     useEffect(() => {
-        fetch('/lessons.json')
+        // Fetch lesson data from the backend API
+        fetch(`https://japanese-vocabulary-chi.vercel.app/api/lessons/${id}`)
             .then((response) => response.json())
             .then((data) => {
-                const selectedLesson = data.find((lesson) => lesson.id === parseInt(id));
-                if (!selectedLesson) {
-                    navigate('/lessons');
+                if (!data) {
+                    navigate('/lessons'); // Redirect if no lesson found
                 } else {
-                    setLesson(selectedLesson);
+                    setLesson(data); // Set the fetched lesson data
                 }
             })
             .catch((error) => console.error('Error fetching lesson:', error));
@@ -27,8 +27,8 @@ const LessonDetails = () => {
 
     const playPronunciation = (audio) => {
         if (audioRef.current) {
-            audioRef.current.src = audio;
-            audioRef.current.play();
+            audioRef.current.src = audio; // Set the audio source
+            audioRef.current.play(); // Play the audio
         }
     };
 
@@ -44,18 +44,20 @@ const LessonDetails = () => {
         }
     };
 
-    if (!lesson) return <div className="flex justify-center items-center h-screen"><p className="text-xl font-semibold">Loading...</p></div>;
+    if (!lesson) {
+        return <div className="flex justify-center items-center h-screen"><p className="text-xl font-semibold">Loading...</p></div>;
+    }
 
-    const { steps } = lesson;
-    const currentStep = steps[selectedStep];
-    const vocabularies = currentStep.vocabularies || [];
+    const { steps } = lesson; // Destructure steps from lesson
+    const currentStep = steps[selectedStep]; // Get the current step
+    const vocabularies = currentStep.vocabularies || []; // Get vocabularies from the current step
 
     return (
         <div>
             <Navbar />
             <div
                 className="relative bg-cover bg-center h-[50vh] flex items-center justify-center"
-                style={{ backgroundImage: `url(${lesson.image})` }}
+                style={{ backgroundImage: `url(${lesson.image})` }} // Background image for the lesson
             >
                 <div className="absolute inset-0 bg-black bg-opacity-50"></div>
                 <div className="relative z-10 text-center text-white">
@@ -78,7 +80,7 @@ const LessonDetails = () => {
                                     } transition-all`}
                                 onClick={() => {
                                     setSelectedStep(index);
-                                    setCurrentVocabIndex(0);
+                                    setCurrentVocabIndex(0); // Reset vocab index when step changes
                                 }}
                             >
                                 {step.title}
@@ -106,7 +108,7 @@ const LessonDetails = () => {
                                 Pronunciation: <span className="font-bold">{vocabularies[currentVocabIndex].pronunciation}</span>
                             </p>
                             <p className="text-lg text-gray-600 mb-2">
-                            meaning: <span className="font-bold">{vocabularies[currentVocabIndex].meaning}</span>
+                                Meaning: <span className="font-bold">{vocabularies[currentVocabIndex].meaning}</span>
                             </p>
                             <p className="text-gray-700 mb-6">{vocabularies[currentVocabIndex].whenToSay}</p>
 
@@ -154,5 +156,3 @@ const LessonDetails = () => {
 };
 
 export default LessonDetails;
-
-

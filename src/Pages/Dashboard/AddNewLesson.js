@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import axios from 'axios'; // Import Axios
 
-const AddLesson = () => {
+const AddNewLesson = () => {
     const [lesson, setLesson] = useState({
         title: "",
         description: "",
@@ -54,36 +53,10 @@ const AddLesson = () => {
         setCurrentStep({ title: "", content: "", vocabularies: [] });
     };
 
-    const handleSubmit = async () => {
-        // Log the lesson object for debugging
-        console.log("Final Lesson Data:", JSON.stringify(lesson, null, 2));
-    
-        // Validation: Ensure required fields are not empty
-        if (!lesson.title || !lesson.description || lesson.steps.length === 0) {
-            console.error("Incomplete lesson data. Please fill out all fields and add at least one step.");
-            alert("Please fill out all fields and add at least one step.");
-            return;
-        }
-    
-        try {
-            // Make POST request to API
-            const response = await axios.post('http://localhost:5000/api/lessons', lesson, {
-                headers: { 'Content-Type': 'application/json' },
-            });
-    
-            console.log("Lesson Submitted Successfully:", response.data);
-            alert("Lesson submitted successfully!");
-    
-            // Reset the state after successful submission
-            setLesson({ title: "", description: "", image: "", steps: [] });
-            setCurrentStep({ title: "", content: "", vocabularies: [] });
-            setCurrentVocabulary({ word: "", pronunciation: "", whenToSay: "", meaning: "", audio: "" });
-        } catch (error) {
-            console.error("Error submitting lesson:", error);
-            alert("An error occurred while submitting the lesson. Please try again.");
-        }
+    const handleSubmit = () => {
+        console.log("Lesson Submitted:", lesson);
+        setLesson({ title: "", description: "", image: "", steps: [] });
     };
-    
 
     return (
         <div className="p-6 py-20 card font-sans">
@@ -251,4 +224,4 @@ const AddLesson = () => {
     );
 };
 
-export default AddLesson;
+export default AddNewLesson;

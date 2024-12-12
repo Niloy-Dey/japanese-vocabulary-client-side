@@ -9,7 +9,7 @@ const WhyUsSection = () => {
             </div>
             <div className="md:w-1/2 p-6 md:pl-8">
                 <h2 className="text-xl lg:mb-10 font-bold text-primary"> <span className="text-green-500">▶ </span>  WHY US</h2>
-                <h3 className="text-5xl font-semibold text-primary">Why Inlingo English Courses?</h3>
+                <h3 className="text-5xl font-semibold text-primary">Why japanese English Courses?</h3>
                 <p className="mt-4 text-muted-foreground">
                     Lorem ipsum dolor sit amet consectetur. Montes quisque urna molestie tincidunt aliquet quam. Imperdiet at pellentesque vitae aliquet tempor eget rutrum tellus. Leo a luctus vitae urna nibh
                     faucibus. A sagittis quisque ligula vitae dignissim vel nunc urna urna. Morbi luctus purus vitae neque vitae pellentesque ultricies.
